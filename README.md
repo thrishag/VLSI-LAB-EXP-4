@@ -303,7 +303,7 @@ endmodule
 
 
 
-**OUTPUT WAVEFORM : **
+OUTPUT WAVEFORM :
 
 
 
@@ -361,6 +361,11 @@ RIPPLE COUNTER :
 
 
 ![image](https://github.com/thrishag/VLSI-LAB-EXP-4/assets/98105360/28ba5c9d-5cf5-4189-8811-afde94e1ef21)
+
+
+
+
+
 
 
 
