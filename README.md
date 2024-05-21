@@ -246,31 +246,35 @@ endmodule
 
 MOD 10 COUNTER :
 
-
-
 ~~~
-module updown(clk,rst,updown,out);
-input clk,rst,updown;
-output reg [3:0]out;
-always@(posedge clk)
+module mod(clk,rst,count);
+input clk,rst;
+output reg[3:0]count;
+always @(posedge clk)
 begin
-if (rst==1)
-out=4'b0000;
-else if(updown==1)
-out=out+1;
+if(rst==1 | count==4'b1001)
+count <= 4'b0000;
 else
-out=out-1;
+count <= count +1;
 end
 endmodule
+
 ~~~
+
 
 
 
 RIPPLE COUNTER :
 
-
-
 ~~~
+module ripplecounter(clk,rst,q);
+input clk,rst;
+output [3:0]q;
+tff tff1(q[0],clk,rst);
+tff tff2(q[1],q[0],rst);
+tff tff3(q[2],q[1],rst);
+tff tff4(q[3],q[2],rst);
+endmodule
 module tff(q,clk,rst);
 input clk,rst;
 output q;
@@ -278,29 +282,20 @@ wire d;
 dff df1(q,d,clk,rst);
 not n1(d,q);
 endmodule
-
 module dff(q,d,clk,rst);
 input d,clk,rst;
 output q;
 reg q;
-always @(posedge clk or posedge rst)
+always@(posedge clk or posedge rst)
 begin
-if (rst)
-q=1'b0;
-else 
+if(rst)
+q=1'b10;
+else
 q=d;
 end
 endmodule
 
-module ripplecounter(clk,rst,q);
-input clk,rst;
-output [3:0]q;
-tff tf1(q[0],clk,rst);
-tff tf3(q[2],q[1],rst);
-tff tf4(q[3],q[2],rst);
-endmodule
 ~~~
-
 
 
 OUTPUT WAVEFORM :
